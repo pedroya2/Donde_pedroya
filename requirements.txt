@@ -1,0 +1,14 @@
+asgiref==3.6.0
+dj-database-url==1.2.0
+Django==4.1.4
+django-filter==22.1
+django-heroku==0.3.1
+django-tables2==2.4.1
+mysql==0.0.3
+mysql-client==0.0.1
+mysqlclient==2.1.1
+psycopg2==2.9.5
+python-decouple==3.6
+sqlparse==0.4.3
+tzdata==2022.7
+whitenoise==6.2.0

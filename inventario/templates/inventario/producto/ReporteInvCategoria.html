@@ -1,0 +1,92 @@
+{% extends "inventario/comun/base.html" %}
+
+{% block content %}
+ <article class="content responsive-tables-page">
+     <div class="title-block">
+         <h1 class="title"> Listar productos por Categoria </h1>
+         <h1 class="title">
+           {% for user in categoria %}
+             {{  user.nombrecatg }}
+           {% endfor %} </h1>
+           {{ literalactivo }}--{{ literaliva }}--{{ literalNivel }}--{{ literalDeposito }}
+     </div>
+
+           <section class="section">
+         <div class="row">{{ item.id}}
+             <div class="col-md-12">
+             {% if messages %}
+             {% for message in messages %}
+<div class="card card-primary">
+<div class="card-header">
+ <div class="header-block">
+     <em class="fa fa-check"></em>
+         <p class="title">{{ message }}</p>
+     </div>
+ </div>
+</div>
+{% endfor %}
+{%endif%}
+                 <div class="card">
+                     <div class="card-block">
+                         <div class="card-title-block">
+                             <h3 class="title">Productos</h3>
+                         </div>
+                         <section class="example">
+                             <div class="table-responsive">
+                                 <table id="example2" class="table table-striped table-bordered table-hover">
+                                     <thead>
+                                         <tr>
+                                             <th>Item</th>
+                                             <th>Marca</th>
+                                             <th>Codigo Barra</th>
+                                             <th>Nombre</th>
+                                             <th>Precio</th>
+                                             <th>Disponible</th>
+                                             <th>Stock Minimo</th>
+                                             <th>Stock Maximo</th>
+                                             <th>Deposito</th>
+                                             <th>Medida</th>
+                                             <th>IVA</th>
+                                             </tr>
+                                     </thead>
+                                     <tbody>
+                                        {% for item in producto %}
+                                         <tr>
+                                             <td>{{ item.id}}</td>
+                                             <td>{{ item.marca.NombreMarca }}</td>
+                                             <td>{{ item.codbar}}</td>
+                                             <td>{{ item.descripcion }}</td>
+                                             <td>{{ item.precio }}</td>
+                                             <td>{{ item.disponible }}</td>
+                                             <td>{{ item.MinUnidades }}</td>
+                                             <td>{{ item.MaxUnidades }}</td>
+                                             <td>{{ item.Deposito }}</td>
+                                             <td>{{ item.get_categoria_display}}</td>
+                                             <td>
+                                                 {% if item.tiene_iva == True %}
+                                                 Si
+                                                 {%endif%}
+
+                                                 {% if item.tiene_iva == False %}
+                                                 No
+                                                 {% endif %}
+                                             </td>
+                                             <td>
+
+                                             </td>
+                                         </tr>
+                                         {% endfor %}
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </section>
+                     </div>
+                 </div>
+                    <a href="/inventario/GenerarListadoCatProdPDF" class="btn btn-secondary btn-lg"><em class="fa fa-print"></em>Generar PDF</a>
+             </div>
+         </div>
+     </section>
+ </article>
+
+
+{% endblock %}

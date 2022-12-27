@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                    }
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+                    }
+
+            tr:nth-child(even){background-color: #f2f2f2}
+
+            th,tfoot {
+                background-color: #FCFDFC;
+                color: black;
+                }
+
+            #factura_mensaje
+            {
+                text-align: center;
+                background-color: #b8afaf;
+                font-size: 18px;
+                padding: auto;
+                padding-top: 8px;
+            }
+
+            #negocio_nombre
+            {
+                font-size: 18px;
+                font-weight: 100;
+                text-align: center;
+                padding-top: 8px;
+                height: 12px;
+            }
+            #Fecha_reporte
+            {
+                font-size: 18px;
+                font-weight: 100;
+                text-align: right;
+                padding-top: 8px;
+                height: 12px;
+            }
+            @page {
+              size: letter landscape;
+              margin: 1cm;
+
+                  }
+
+        </style>
+    </head>
+    <body>
+
+        <div class='wrapper'>
+
+            <div id="negocio_nombre">
+            {{ general.nombre_negocio }}               {{ fecha }}
+            </div>
+            <div class='header'>
+                  <h1 class="title">
+                  Reporte de Productos por Categoria
+                  {% for user in categoria %}
+                    {{  user.nombrecatg }}
+                  {% endfor %} </h1>
+            </div>
+        <div>
+        <div class='details'>
+            {{ literalactivo }} <br/>
+            {{ literaliva }} <br/>
+            {{ literalNivel }} <br/>
+            {{ literalDeposito }} <br/>
+            <hr class='hrItem' />
+        </div>
+    </div>
+
+    <div>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Marca</th>
+    <th>Codigo Barra</th>
+    <th>Nombre</th>
+    <th>Precio</th>
+    <th>Unidades</th>
+    <th>Stock Minimo</th>
+    <th>Stock Maximo</th>
+    <th>Deposito</th>
+    <th>Medida</th>
+    <th>IVA</th>
+  </tr>
+  {% for item in producto %}
+  <tr>
+    <td>{{ item.id}}</td>
+    <td>{{ item.marca.NombreMarca }}</td>
+    <td>{{ item.codbar}}</td>
+    <td>{{ item.descripcion }}</td>
+    <td>{{ item.precio }}</td>
+    <td>{{ item.disponible }}</td>
+    <td>{{ item.MinUnidades }}</td>
+    <td>{{ item.MaxUnidades }}</td>
+    <td>{{ item.Deposito }}</td>
+    <td>{{ item.get_categoria_display}}</td>
+    <td>
+        {% if item.tiene_iva == True %}
+        Si
+        {%endif%}
+
+        {% if item.tiene_iva == False %}
+        No
+        {% endif %}
+    </td>
+
+  </tr>
+  {% endfor %}
+  <tr>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+    <td>-----</td>
+
+  </tr>
+</table>
+
+    </div>
+
+    <div id="factura_mensaje">
+      Numero Productos Listado:  {{ numtotal }}
+    </div>
+    
+
+    </body>
+</html>
